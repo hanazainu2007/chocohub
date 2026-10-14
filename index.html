@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChocoHub 🍫 - Sky Blue & Pastel Pink Artisanal Chocolates</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Fredoka & Poppins for bubbly rounded look -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        bubbly: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        sky: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        },
+                        pinkgum: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f472b6',
+                            400: '#ec4899',
+                            500: '#db2777',
+                        },
+                        chocohub: {
+                            dark: '#1e293b',
+                            chocolate: '#451a03',
+                            caramel: '#d97706',
+                        }
+                    },
+                    borderRadius: {
+                        'blob': '40% 60% 70% 30% / 40% 50% 60% 50%',
+                        'blob-alt': '60% 40% 30% 70% / 50% 60% 40% 50%',
+                    },
+                    keyframes: {
+                        bubbleFloat: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(4deg)' },
+                        },
+                        bouncyPulse: {
+                            '0%, 100%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.06)' },
+                        },
+                        wobble: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
+                    },
+                    animation: {
+                        'bubble-float': 'bubbleFloat 5s ease-in-out infinite',
+                        'bouncy': 'bouncyPulse 2.5s ease-in-out infinite',
+                        'wobble': 'wobble 1s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sky-pink-bg {
+            background-color: #f0f9ff;
+            background-image: radial-gradient(#fbcfe8 2px, transparent 2px), radial-gradient(#bae6fd 2px, #f0f9ff 2px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+        .glossy-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 3px solid #bae6fd;
+            box-shadow: 0 15px 35px -5px rgba(14, 165, 233, 0.12), inset 0 2px 6px rgba(255, 255, 255, 0.9);
+        }
+        .sky-pink-btn {
+            background: linear-gradient(135deg, #38bdf8 0%, #ec4899 100%);
+            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+            border-radius: 30px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .sky-pink-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(236, 72, 153, 0.4), inset 0 2px 6px rgba(255, 255, 255, 0.7);
+        }
+        .gloss-highlight {
+            position: relative;
+            overflow: hidden;
+        }
+        .gloss-highlight::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.45) 50%, transparent 55%);
+            transform: rotate(35deg);
+            pointer-events: none;
+            transition: all 0.7s ease;
+        }
+        .gloss-highlight:hover::after {
+            transform: rotate(35deg) translate(20px, 20px);
+        }
+    </style>
+</head>
+<body class="sky-pink-bg text-chocohub-dark font-sans antialiased selection:bg-pinkgum-200 selection:text-pinkgum-700">
+
+    <!-- Floating Background Bubbles -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-55">
+        <div class="absolute top-16 left-8 w-28 h-28 bg-sky-200 rounded-blob opacity-60 animate-bubble-float"></div>
+        <div class="absolute top-1/3 right-12 w-36 h-36 bg-pinkgum-200 rounded-blob-alt opacity-50 animate-bubble-float" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-24 left-1/4 w-32 h-32 bg-sky-300 rounded-blob opacity-40 animate-bubble-float" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-12 right-1/3 w-40 h-40 bg-pinkgum-300 rounded-blob-alt opacity-40 animate-bubble-float" style="animation-delay: 3s;"></div>
+    </div>
+
+    <!-- Header & Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b-2 border-sky-200 transition-all duration-300 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-3xl bg-gradient-to-tr from-sky-400 to-pinkgum-400 flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform gloss-highlight">
+                        <i class="fa-solid fa-cloud text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bubbly font-bold tracking-wide text-chocohub-dark">Choco<span class="text-pinkgum-500">Hub</span> ☁️</span>
+                        <span class="block text-[10px] uppercase tracking-widest text-sky-500 font-bold">Sky Blue & Pastel Pink Artistry</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 font-bubbly text-base text-gray-700">
+                    <a href="#home" class="hover:text-pinkgum-500 transition-colors">Home ☁️</a>
+                    <a href="#collections" class="hover:text-pinkgum-500 transition-colors">Cloud Collections 🍧</a>
+                    <a href="#bestsellers" class="hover:text-pinkgum-500 transition-colors">Sweet Best Sellers ✨</a>
+                    <a href="#story" class="hover:text-pinkgum-500 transition-colors">Our Story 💖</a>
+                </nav>
+
+                <!-- Cart Button & Mobile Menu Toggle -->
+                <div class="flex items-center gap-4">
+                    <button onclick="openCartModal()" class="relative px-4.5 py-2.5 rounded-3xl bg-sky-100 hover:bg-sky-200 text-chocohub-dark font-bubbly font-semibold flex items-center gap-2.5 transition-transform active:scale-95 shadow-sm border border-sky-300" aria-label="Shopping Cart">
+                        <i class="fa-solid fa-bag-shopping text-pinkgum-500 text-lg"></i>
+                        <span class="hidden sm:inline">Cloud Bag</span>
+                        <span id="cart-badge" class="bg-pinkgum-500 text-white text-xs font-bubbly font-bold w-5 h-5 rounded-full flex items-center justify-center shadow">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Toggle Button -->
+                    <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-2xl bg-sky-100 text-chocohub-dark hover:bg-sky-200 transition-colors" aria-label="Toggle Menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 border-t border-sky-200 px-6 py-4 shadow-xl">
+            <div class="flex flex-col space-y-3 font-bubbly text-lg">
+                <a href="#home" onclick="toggleMobileMenu()" class="mobile-link py-2 hover:text-pinkgum-500">Home ☁️</a>
+                <a href="#collections" onclick="toggleMobileMenu()" class="mobile-link py-2 hover:text-pinkgum-500">Cloud Collections 🍧</a>
+                <a href="#bestsellers" onclick="toggleMobileMenu()" class="mobile-link py-2 hover:text-pinkgum-500">Sweet Best Sellers ✨</a>
+                <a href="#story" onclick="toggleMobileMenu()" class="mobile-link py-2 hover:text-pinkgum-500">Our Story 💖</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-28 pb-20 px-4 sm:px-6 lg:px-8 relative z-10 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <div class="space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 border-2 border-pinkgum-300 text-pinkgum-600 font-bubbly text-sm font-semibold shadow-sm animate-bouncy">
+                    <span>☁️ Handcrafted in Sky Blue & Pastel Pink Dream</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl font-bubbly font-bold tracking-tight leading-tight text-chocohub-dark">
+                    Sweet Dreams Float on <span class="text-pinkgum-500 inline-block animate-wobble">ChocoHub Clouds</span>! ✨
+                </h1>
+                
+                <p class="text-base sm:text-lg text-gray-700 font-sans max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                    Welcome to ChocoHub! Taste the magic of artisanal chocolates wrapped in pastel perfection. Glossy truffles, ruby cocoa, and dreamy caramel fillings designed to make your heart melt. 🍫💖
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#bestsellers" class="w-full sm:w-auto px-8 py-4 sky-pink-btn text-white font-bubbly font-bold text-lg text-center gloss-highlight">
+                        Explore Dream Treats ☁️
+                    </a>
+                    <a href="#collections" class="w-full sm:w-auto px-8 py-4 rounded-3xl bg-white hover:bg-sky-100 text-chocohub-dark border-2 border-sky-300 font-bubbly font-bold text-lg transition-all text-center shadow-sm">
+                        View Collections 🍧
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 pt-6 max-w-md mx-auto lg:mx-0 text-center">
+                    <div class="p-3 rounded-2xl bg-white/90 border border-sky-200 shadow-sm">
+                        <span class="block text-xl">☁️</span>
+                        <span class="text-xs font-bubbly font-semibold text-chocohub-dark">Cloud Soft</span>
+                    </div>
+                    <div class="p-3 rounded-2xl bg-white/90 border border-sky-200 shadow-sm">
+                        <span class="block text-xl">💖</span>
+                        <span class="text-xs font-bubbly font-semibold text-chocohub-dark">Pastel Pink</span>
+                    </div>
+                    <div class="p-3 rounded-2xl bg-white/90 border border-sky-200 shadow-sm">
+                        <span class="block text-xl">✨</span>
+                        <span class="text-xs font-bubbly font-semibold text-chocohub-dark">Glossy Finish</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center relative">
+                <div class="absolute w-80 h-80 sm:w-96 sm:h-96 bg-gradient-to-tr from-sky-300/30 to-pinkgum-300/30 rounded-blob filter blur-2xl -z-10 animate-pulse"></div>
+                
+                <div class="relative w-72 h-80 sm:w-96 sm:h-[420px] rounded-[40px] shadow-2xl overflow-hidden border-4 border-sky-300 animate-bubble-float gloss-highlight">
+                    <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&q=80&w=800" alt="Artisanal Sky Blue & Pink Chocolates" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-center">
+                        <span class="inline-block bg-white/95 text-pinkgum-600 font-bubbly text-xs font-bold px-4 py-2 rounded-2xl shadow-lg border border-pinkgum-200 mx-auto">
+                            🍧 100% Pastel Dream Artisanal Cocoa
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Cloud Collections -->
+    <section id="collections" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+            <span class="px-4 py-1.5 rounded-full bg-pinkgum-100 text-pinkgum-600 font-bubbly text-sm font-bold uppercase tracking-wider">
+                🍧 Cloud Collections
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-bubbly font-bold text-chocohub-dark">
+                Explore Pastel & Sky Flavors! ✨
+            </h2>
+            <p class="text-gray-600 font-sans">
+                Each collection features ultra-glossy finishes, sky blue accents, and pastel pink sweetness. ☁️
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="glossy-card rounded-[36px] p-6 flex flex-col justify-between group hover:border-pinkgum-400 transition-all">
+                <div class="relative h-48 rounded-2xl overflow-hidden mb-6 gloss-highlight">
+                    <img src="https://images.unsplash.com/photo-1548907040-4baa42d10919?auto=format&fit=crop&q=80&w=500" alt="Cloud Truffle Dream" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-3 left-3 bg-sky-400 text-white font-bubbly text-xs font-bold px-3 py-1 rounded-full backdrop-blur shadow">
+                        Sky Truffle
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bubbly font-bold text-xl text-chocohub-dark">Cloud Truffle Dream</h3>
+                    <p class="text-xs text-gray-600 font-sans">Velvety dark ganache encased in delicate sky-blue dusted shells.</p>
+                </div>
+                <div class="pt-6">
+                    <a href="#bestsellers" class="block w-full py-3 text-center bg-sky-100 hover:bg-sky-400 hover:text-white text-chocohub-dark font-bubbly font-semibold text-xs rounded-2xl transition-colors shadow-sm">
+                        Explore Truffles ☁️
+                    </a>
+                </div>
+            </div>
+
+            <div class="glossy-card rounded-[36px] p-6 flex flex-col justify-between group hover:border-pinkgum-400 transition-all">
+                <div class="relative h-48 rounded-2xl overflow-hidden mb-6 gloss-highlight">
+                    <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&q=80&w=500" alt="Pink Blossom Pralines" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-3 left-3 bg-pinkgum-500 text-white font-bubbly text-xs font-bold px-3 py-1 rounded-full backdrop-blur shadow">
+                        Pink Blossom
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bubbly font-bold text-xl text-chocohub-dark">Pink Blossom Pralines</h3>
+                    <p class="text-xs text-gray-600 font-sans">Sweet pastel pink chocolate shells filled with creamy raspberry praline.</p>
+                </div>
+                <div class="pt-6">
+                    <a href="#bestsellers" class="block w-full py-3 text-center bg-pinkgum-100 hover:bg-pinkgum-500 hover:text-white text-chocohub-dark font-bubbly font-semibold text-xs rounded-2xl transition-colors shadow-sm">
+                        Explore Pink 💖
+                    </a>
+                </div>
+            </div>
+
+            <div class="glossy-card rounded-[36px] p-6 flex flex-col justify-between group hover:border-pinkgum-400 transition-all">
+                <div class="relative h-48 rounded-2xl overflow-hidden mb-6 gloss-highlight">
+                    <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&q=80&w=500" alt="Caramel Sky Bar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-3 left-3 bg-amber-600 text-white font-bubbly text-xs font-bold px-3 py-1 rounded-full backdrop-blur shadow">
+                        Caramel Sky
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bubbly font-bold text-xl text-chocohub-dark">Caramel Sky Bar</h3>
+                    <p class="text-xs text-gray-600 font-sans">Rich milk chocolate bars drizzled with salted caramel and sugar pearls.</p>
+                </div>
+                <div class="pt-6">
+                    <a href="#bestsellers" class="block w-full py-3 text-center bg-sky-100 hover:bg-sky-400 hover:text-white text-chocohub-dark font-bubbly font-semibold text-xs rounded-2xl transition-colors shadow-sm">
+                        Explore Caramel 🍯
+                    </a>
+                </div>
+            </div>
+
+            <div class="glossy-card rounded-[36px] p-6 flex flex-col justify-between group hover:border-pinkgum-400 transition-all">
+                <div class="relative h-48 rounded-2xl overflow-hidden mb-6 gloss-highlight">
+                    <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&q=80&w=500" alt="Cloud Gift Vault" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-3 left-3 bg-purple-500 text-white font-bubbly text-xs font-bold px-3 py-1 rounded-full backdrop-blur shadow">
+                        Gift Vault
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-bubbly font-bold text-xl text-chocohub-dark">Cloud Gift Vault</h3>
+                    <p class="text-xs text-gray-600 font-sans">Assorted 20-piece luxury chocolates in sky-blue and pastel pink boxes.</p>
+                </div>
+                <div class="pt-6">
+                    <a href="#bestsellers" class="block w-full py-3 text-center bg-pinkgum-100 hover:bg-pinkgum-500 hover:text-white text-chocohub-dark font-bubbly font-semibold text-xs rounded-2xl transition-colors shadow-sm">
+                        Explore Vaults 🎁
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sweet Best Sellers (Prices & Review Stars Removed) -->
+    <section id="bestsellers" class="py-24 bg-white/60 backdrop-blur-md px-4 sm:px-6 lg:px-8 relative z-10 border-y-2 border-sky-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <span class="px-4 py-1.5 rounded-full bg-sky-400 text-white font-bubbly text-sm font-bold uppercase tracking-wider shadow">
+                    ✨ Sweet Best Sellers
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-bubbly font-bold text-chocohub-dark">
+                    Most Loved Cloud Treats! 🍫
+                </h2>
+                <p class="text-gray-600 font-sans">
+                    Click 'Add to Cloud Bag' to select your favorite artisanal chocolates.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Product 1 -->
+                <div class="glossy-card rounded-[36px] overflow-hidden flex flex-col justify-between group">
+                    <div class="relative h-60 overflow-hidden bg-sky-50 gloss-highlight">
+                        <span class="absolute top-3 left-3 z-10 bg-pinkgum-500 text-white font-bubbly text-xs font-bold px-3 py-1 rounded-full uppercase shadow">
+                            Best Seller 💖
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1548907040-4baa42d10919?auto=format&fit=crop&q=80&w=500" alt="Sky Blue Truffle Box" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button onclick="addToCart('Sky Blue Truffle Box')" class="absolute bottom-3 right-3 bg-sky-500 hover:bg-sky-600 text-white w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg transition-transform active:scale-95" title="Add to Cloud Bag">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bubbly font-bold text-xl text-chocohub-dark group-hover:text-pinkgum-500 transition-colors">Sky Blue Truffle Box</h3>
+                            <p class="text-xs text-gray-500 mt-1 font-sans">Box of 9 artisan truffles in sky-blue gift packaging</p>
+                        </div>
+                        <div class="pt-4 border-t-2 border-sky-100 flex justify-end">
+                            <button onclick="addToCart('Sky Blue Truffle Box')" class="px-5 py-2.5 sky-pink-btn text-white font-bubbly font-semibold text-xs rounded-2xl shadow-sm">
+                                Add to Bag ☁️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="glossy-card rounded-[36px] overflow-hidden flex flex-col justify-between group">
+                    <div class="relative h-60 overflow-hidden bg-sky-50 gloss-highlight">
+                        <span class="absolute top-3 left-3 z-10 bg-sky-400 text-white font-bubbly text-xs font-bold px-3 py-1 rounded-full uppercase shadow">
+                            Pastel Pink ☁️
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&q=80&w=500" alt="Pastel Pink Ganache Bar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button onclick="addToCart('Pastel Pink Ganache Bar')" class="absolute bottom-3 right-3 bg-sky-500 hover:bg-sky-600 text-white w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg transition-transform active:scale-95" title="Add to Cloud Bag">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bubbly font-bold text-xl text-chocohub-dark group-hover:text-pinkgum-500 transition-colors">Pastel Pink Ganache Bar</h3>
+                            <p class="text-xs text-gray-500 mt-1 font-sans">Silky milk chocolate bar with strawberry cream center</p>
+                        </div>
+                        <div class="pt-4 border-t-2 border-sky-100 flex justify-end">
+                            <button onclick="addToCart('Pastel Pink Ganache Bar')" class="px-5 py-2.5 sky-pink-btn text-white font-bubbly font-semibold text-xs rounded-2xl shadow-sm">
+                                Add to Bag ☁️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="glossy-card rounded-[36px] overflow-hidden flex flex-col justify-between group">
+                    <div class="relative h-60 overflow-hidden bg-sky-50 gloss-highlight">
+                        <span class="absolute top-3 left-3 z-10 bg-amber-600 text-white font-bubbly text-xs font-bold px-3 py-1 rounded-full uppercase shadow">
+                            Caramel Sky 🍯
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&q=80&w=500" alt="Cloud Caramel Pralines" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button onclick="addToCart('Cloud Caramel Pralines')" class="absolute bottom-3 right-3 bg-sky-500 hover:bg-sky-600 text-white w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg transition-transform active:scale-95" title="Add to Cloud Bag">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bubbly font-bold text-xl text-chocohub-dark group-hover:text-pinkgum-500 transition-colors">Cloud Caramel Pralines</h3>
+                            <p class="text-xs text-gray-500 mt-1 font-sans">Dark cocoa shells filled with molten sea salt caramel</p>
+                        </div>
+                        <div class="pt-4 border-t-2 border-sky-100 flex justify-end">
+                            <button onclick="addToCart('Cloud Caramel Pralines')" class="px-5 py-2.5 sky-pink-btn text-white font-bubbly font-semibold text-xs rounded-2xl shadow-sm">
+                                Add to Bag ☁️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="glossy-card rounded-[36px] overflow-hidden flex flex-col justify-between group">
+                    <div class="relative h-60 overflow-hidden bg-sky-50 gloss-highlight">
+                        <span class="absolute top-3 left-3 z-10 bg-purple-600 text-white font-bubbly text-xs font-bold px-3 py-1 rounded-full uppercase shadow">
+                            Gift Vault 🎁
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&q=80&w=500" alt="Ultimate Sky & Pink Gift Vault" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button onclick="addToCart('Ultimate Sky & Pink Gift Vault')" class="absolute bottom-3 right-3 bg-sky-500 hover:bg-sky-600 text-white w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg transition-transform active:scale-95" title="Add to Cloud Bag">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <h3 class="font-bubbly font-bold text-xl text-chocohub-dark group-hover:text-pinkgum-500 transition-colors">Ultimate Gift Vault</h3>
+                            <p class="text-xs text-gray-500 mt-1 font-sans">Luxury 20-piece assorted chocolates in sky-blue & pink box</p>
+                        </div>
+                        <div class="pt-4 border-t-2 border-sky-100 flex justify-end">
+                            <button onclick="addToCart('Ultimate Sky & Pink Gift Vault')" class="px-5 py-2.5 sky-pink-btn text-white font-bubbly font-semibold text-xs rounded-2xl shadow-sm">
+                                Add to Bag ☁️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="story" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="glossy-card rounded-[40px] p-8 sm:p-14 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="px-4 py-1.5 rounded-full bg-sky-200 text-sky-700 font-bubbly text-xs font-bold uppercase tracking-wider">
+                    💖 Our Story & Mission
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-bubbly font-bold text-chocohub-dark">
+                    Crafting Dreams in Sky Blue & Pastel Pink ✨
+                </h2>
+                <p class="text-gray-600 font-sans leading-relaxed">
+                    At ChocoHub, we believe chocolate should be an experience of pure joy and wonder. Founded with a passion for artisanal confectionery, we combine sustainably sourced organic cocoa beans with enchanting pastel colors and glossy finishes. Every piece is handmade in small batches with love. ☁️🍫
+                </p>
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div class="p-4 rounded-3xl bg-sky-50 border border-sky-200">
+                        <span class="block font-bubbly font-bold text-2xl text-sky-600">100%</span>
+                        <span class="text-xs text-gray-600 font-sans">Organic Fair-Trade Cocoa</span>
+                    </div>
+                    <div class="p-4 rounded-3xl bg-pinkgum-50 border border-pinkgum-200">
+                        <span class="block font-bubbly font-bold text-2xl text-pinkgum-500">Zero</span>
+                        <span class="text-xs text-gray-600 font-sans">Artificial Palm Oils</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative h-80 sm:h-96 rounded-3xl overflow-hidden shadow-xl border-4 border-pinkgum-200 gloss-highlight">
+                <img src="https://images.unsplash.com/photo-1581798459219-30b0f770d1d3?auto=format&fit=crop&q=80&w=800" alt="Chocolatier Crafting" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white/90 border-t-2 border-sky-200 pt-16 pb-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div class="space-y-4 md:col-span-1">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-400 to-pinkgum-400 flex items-center justify-center text-white shadow">
+                        <i class="fa-solid fa-cloud text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bubbly font-bold text-chocohub-dark">Choco<span class="text-pinkgum-500">Hub</span> ☁️</span>
+                </div>
+                <p class="text-xs text-gray-600 font-sans">
+                    Artisanal cloud chocolates crafted in delightful sky blue and pastel pink perfection.
+                </p>
+                <div class="flex space-x-3">
+                    <a href="#" class="w-9 h-9 rounded-full bg-sky-100 hover:bg-sky-400 hover:text-white text-sky-600 flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-pinkgum-100 hover:bg-pinkgum-500 hover:text-white text-pinkgum-500 flex items-center justify-center transition-colors"><i class="fa-brands fa-tiktok text-sm"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-sky-100 hover:bg-sky-400 hover:text-white text-sky-600 flex items-center justify-center transition-colors"><i class="fa-brands fa-pinterest text-sm"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-bubbly font-bold text-base text-chocohub-dark mb-4">Cloud Navigation ☁️</h4>
+                <ul class="space-y-2 text-sm font-sans text-gray-600">
+                    <li><a href="#home" class="hover:text-pinkgum-500 transition-colors">Home Page</a></li>
+                    <li><a href="#collections" class="hover:text-pinkgum-500 transition-colors">Cloud Collections</a></li>
+                    <li><a href="#bestsellers" class="hover:text-pinkgum-500 transition-colors">Sweet Best Sellers</a></li>
+                    <li><a href="#story" class="hover:text-pinkgum-500 transition-colors">Our Story & Mission</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bubbly font-bold text-base text-chocohub-dark mb-4">Sweet Delights 🍧</h4>
+                <ul class="space-y-2 text-sm font-sans text-gray-600">
+                    <li><a href="#bestsellers" class="hover:text-pinkgum-500 transition-colors">Sky Blue Truffles</a></li>
+                    <li><a href="#bestsellers" class="hover:text-pinkgum-500 transition-colors">Pastel Pink Ganache</a></li>
+                    <li><a href="#bestsellers" class="hover:text-pinkgum-500 transition-colors">Caramel Pralines</a></li>
+                    <li><a href="#bestsellers" class="hover:text-pinkgum-500 transition-colors">Gift Vaults</a></li>
+                </ul>
+            </div>
+
+            <div class="space-y-4">
+                <h4 class="font-bubbly font-bold text-base text-chocohub-dark">Sweet Newsletter 💖</h4>
+                <p class="text-xs text-gray-600 font-sans">Subscribe for secret drop alerts and sweet discounts!</p>
+                <form onsubmit="handleNewsletter(event)" class="space-y-2">
+                    <input type="email" required placeholder="Enter your email..." class="w-full px-4 py-2.5 rounded-2xl border-2 border-sky-300 focus:outline-none focus:border-pinkgum-400 text-sm font-sans bg-white/80">
+                    <button type="submit" class="w-full py-2.5 sky-pink-btn text-white font-bubbly font-bold text-xs uppercase tracking-wider">
+                        Join Cloud Club ☁️
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-sky-200 text-center text-xs text-gray-500 font-sans">
+            &copy; 2026 ChocoHub Startup. All rights reserved. Made with sky-blue and pastel pink love ☁️💖
+        </div>
+    </footer>
+
+    <!-- Interactive Cart Modal Drawer -->
+    <div id="cart-modal" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex justify-end transition-opacity">
+        <div class="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between border-l-4 border-sky-300 animate-slide-left">
+            
+            <div class="p-6 border-b-2 border-sky-100 flex items-center justify-between bg-sky-50/50">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-pinkgum-500 text-xl"></i>
+                    <h3 class="font-bubbly font-bold text-xl text-chocohub-dark">Your Cloud Bag ☁️</h3>
+                </div>
+                <button onclick="closeCartModal()" class="w-9 h-9 rounded-full bg-white hover:bg-sky-200 text-gray-600 flex items-center justify-center transition-colors border border-sky-200">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="p-6 flex-grow overflow-y-auto space-y-4">
+                <div class="text-center py-16 text-gray-400 font-sans">
+                    <i class="fa-solid fa-cloud-moon text-4xl mb-3 text-sky-300"></i>
+                    <p class="font-bubbly text-base">Your cloud bag is currently empty! ☁️</p>
+                    <p class="text-xs mt-1">Add some sweet treats from our best sellers.</p>
+                </div>
+            </div>
+
+            <div class="p-6 border-t-2 border-sky-100 bg-sky-50/50 space-y-4">
+                <div class="flex items-center justify-between font-bubbly text-lg font-bold text-chocohub-dark">
+                    <span>Total Selected Items:</span>
+                    <span id="cart-total-count" class="text-pinkgum-600">0 items</span>
+                </div>
+                <button onclick="checkoutCart()" class="w-full py-4 sky-pink-btn text-white font-bubbly font-bold text-base text-center gloss-highlight shadow-lg">
+                    Proceed to Sweet Checkout 💖
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 space-y-2 pointer-events-none"></div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let cart = [];
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function openCartModal() {
+            document.getElementById('cart-modal').classList.remove('hidden');
+            renderCartItems();
+        }
+
+        function closeCartModal() {
+            document.getElementById('cart-modal').classList.add('hidden');
+        }
+
+        function addToCart(productName) {
+            const existingItem = cart.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name: productName, quantity: 1 });
+            }
+            updateCartBadge();
+            showToast(`Added ${productName} to your Cloud Bag! ☁️💖`);
+        }
+
+        function removeFromCart(productName) {
+            cart = cart.filter(item => item.name !== productName);
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function updateCartBadge() {
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-badge').innerText = totalCount;
+            document.getElementById('cart-total-count').innerText = `${totalCount} item(s)`;
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-gray-400 font-sans">
+                        <i class="fa-solid fa-cloud-moon text-4xl mb-3 text-sky-300"></i>
+                        <p class="font-bubbly text-base">Your cloud bag is currently empty! ☁️</p>
+                        <p class="text-xs mt-1">Add some sweet treats from our best sellers.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center justify-between p-4 rounded-2xl bg-white border-2 border-sky-200 shadow-sm">
+                    <div>
+                        <h4 class="font-bubbly font-bold text-sm text-chocohub-dark">${item.name}</h4>
+                        <span class="text-xs text-gray-500 font-sans">Quantity: ${item.quantity}</span>
+                    </div>
+                    <button onclick="removeFromCart('${item.name}')" class="text-pinkgum-500 hover:text-pinkgum-700 p-2 transition-colors" title="Remove">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                alert('Your cloud bag is empty! Please add items first. ☁️');
+                return;
+            }
+            alert('🎉 Thank you for choosing ChocoHub! Your sweet order has been placed successfully in our sky blue & pink dream vault! 🍫💖');
+            cart = [];
+            updateCartBadge();
+            closeCartModal();
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'px-5 py-3 rounded-2xl bg-white text-chocohub-dark font-bubbly text-sm font-bold shadow-xl border-2 border-sky-300 pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-300 flex items-center gap-2';
+            toast.innerHTML = `<span class="text-pinkgum-500">✨</span> ${message}`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            alert('💖 Welcome to the ChocoHub Cloud Club! Check your inbox for your 15% discount code!');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
